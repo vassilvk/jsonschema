@@ -122,7 +122,7 @@ func (ctx ValidationContext) Error(keywordPath string, format string, a ...inter
 }
 
 // GetValueLocation returns the location of the currently validated value.
-func GetValueLocation(ctx ValidationContext) string {
+func (ctx ValidationContext) GetValueLocation() string {
 	return ctx.vloc
 }
 
