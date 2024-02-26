@@ -85,6 +85,7 @@ func (ctx CompilerContext) GetResourceSchema() *Schema {
 // ValidationContext provides additional context required in validating for extension.
 type ValidationContext struct {
 	result          validationResult
+	vloc            string
 	validate        func(sch *Schema, schPath string, v interface{}, vpath string) error
 	validateInplace func(sch *Schema, schPath string) error
 	validationError func(keywordPath string, format string, a ...interface{}) *ValidationError
@@ -118,6 +119,11 @@ func (ctx ValidationContext) Validate(s *Schema, spath string, v interface{}, vp
 // keywordPath is relative-json-pointer to keyword.
 func (ctx ValidationContext) Error(keywordPath string, format string, a ...interface{}) *ValidationError {
 	return ctx.validationError(keywordPath, format, a...)
+}
+
+// GetValueLocation returns the location of the currently validated value.
+func GetValueLocation(ctx ValidationContext) string {
+	return ctx.vloc
 }
 
 // Group is used by extensions to group multiple errors as causes to parent error.

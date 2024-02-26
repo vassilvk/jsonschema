@@ -735,7 +735,7 @@ func (s *Schema) validate(scope []schemaRef, vscope int, spath string, v interfa
 	}
 
 	for _, ext := range s.Extensions {
-		if err := ext.Validate(ValidationContext{result, validate, validateInplace, validationError}, v); err != nil {
+		if err := ext.Validate(ValidationContext{result, vloc, validate, validateInplace, validationError}, v); err != nil {
 			errors = append(errors, err)
 		}
 	}
